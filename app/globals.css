@@ -54,6 +54,7 @@ body{animation:page-in var(--motion-slow) var(--ease-out) both}
 @media(prefers-reduced-motion:reduce){.paw-stamp{opacity:.13}}
 
 textarea{font:inherit;line-height:var(--leading)}
+.legal-updated{margin-top:14px;color:var(--meta);font:var(--text-xs)/1.4 var(--font-mono);letter-spacing:.02em}.legal-content ul{margin:14px 0 0;padding-left:22px;color:var(--fg-2)}.legal-content li{margin-top:10px;padding-left:4px}.legal-content strong{color:var(--fg)}
 .story-input{min-height:104px;resize:vertical}
 .turnstile{min-height:65px;display:flex;align-items:center}
 
