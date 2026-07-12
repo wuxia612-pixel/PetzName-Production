@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI Pet Name Generator creates 6 meaningful pet names with explanations from pet type, gender, naming style, and personality keywords.">
+  <title>AI Pet Name Generator | Meaningful Pet Names</title>
+  <style>
+    :root {
+      --bg: #fff6df;
+      --surface: #fffdf5;
+      --surface-warm: #ffecc2;
+      --fg: #123653;
+      --fg-2: #244b63;
+      --muted: #6f7f80;
+      --meta: #9a8a6b;
+      --border: #ead7ad;
+      --border-soft: #f5dfb6;
+      --accent: #f4a338;
+      --accent-on: #102f49;
+      --accent-hover: #eda94e;
+      --accent-active: #91c8df;
+      --success: #16a34a;
+      --warn: #eab308;
+      --danger: #dc2626;
+      --font-display: "Cooper Black", "Cooper Std Black", Georgia, "Times New Roman", serif;
+      --font-body: "Canva Sans", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 17px;
+      --text-lg: 21px;
+      --text-xl: 28px;
+      --text-2xl: 40px;
+      --text-3xl: 56px;
+      --text-4xl: 80px;
+      --leading-body: 1.47;
+      --leading-tight: 1.05;
+      --tracking-display: -0.015em;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --section-y-desktop: 100px;
+      --section-y-tablet: 64px;
+      --section-y-phone: 40px;
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 34px;
+      --radius-pill: 9999px;
+      --elev-flat: none;
+      --elev-ring: 0 0 0 1px var(--border);
+      --elev-raised: 0 18px 46px rgba(18, 54, 83, 0.14);
+      --focus-ring: 0 0 0 4px color-mix(in oklab, var(--accent-active), transparent 52%);
+      --motion-fast: 180ms;
+      --motion-base: 260ms;
+      --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1180px;
+      --container-gutter-desktop: 22px;
+      --container-gutter-tablet: 18px;
+      --container-gutter-phone: 16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 7% 17%, color-mix(in oklab, var(--accent), transparent 86%) 0 3px, transparent 4px),
+        radial-gradient(circle at 82% 10%, color-mix(in oklab, var(--accent-active), transparent 82%) 0 4px, transparent 5px),
+        var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: var(--leading-body);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    p, h1, h2, h3 { margin: 0; }
+    p { text-wrap: pretty; }
+    h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; letter-spacing: var(--tracking-display); }
+    .container {
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--container-gutter-desktop);
+    }
+    .topnav {
+      position: relative;
+      z-index: 20;
+      background: color-mix(in oklab, var(--surface), transparent 8%);
+      border-bottom: 2px solid var(--border-soft);
+    }
+    .topnav-inner {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-5);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 42% 58% 55% 45%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      border: 2px solid color-mix(in oklab, var(--fg), transparent 84%);
+    }
+    .brand-mark::before {
+      content: "";
+      width: 21px;
+      height: 21px;
+      background: var(--accent-on);
+      -webkit-mask: url("mrcx36dx-paw-01.svg") center / contain no-repeat;
+      mask: url("mrcx36dx-paw-01.svg") center / contain no-repeat;
+      transform: rotate(-10deg);
+    }
+    .nav-links { display: flex; align-items: center; gap: var(--space-6); color: var(--fg-2); font-size: var(--text-sm); }
+    .nav-links a:hover { color: var(--accent-active); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      border: 2px solid transparent;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      box-shadow: 0 8px 18px color-mix(in oklab, var(--accent), transparent 78%);
+      transition: transform var(--motion-fast) var(--ease-standard), background var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard);
+    }
+    .btn:focus-visible, input:focus-visible, .chip:focus-visible, summary:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--accent); color: var(--accent-on); }
+    .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 12px 26px color-mix(in oklab, var(--accent), transparent 68%); }
+    .btn-secondary { background: var(--accent-active); color: var(--fg); border-color: color-mix(in oklab, var(--fg), transparent 88%); }
+    .btn-secondary:hover { border-color: var(--meta); }
+    .section { padding-block: var(--section-y-desktop); }
+    .hero {
+      min-height: calc(100svh - 52px);
+      display: grid;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 74%, color-mix(in oklab, var(--accent), transparent 68%) 0 4px, transparent 5px),
+        radial-gradient(circle at 72% 30%, color-mix(in oklab, var(--accent-active), transparent 74%) 0 5px, transparent 6px),
+        radial-gradient(circle at 88% 18%, color-mix(in oklab, var(--accent-active), transparent 42%), transparent 30%),
+        linear-gradient(135deg, color-mix(in oklab, var(--surface-warm), var(--bg) 20%), var(--bg));
+    }
+    .hero-paw-field {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .hero-paw {
+      position: absolute;
+      width: var(--paw-size);
+      height: var(--paw-size);
+      left: var(--paw-left);
+      top: var(--paw-top);
+      opacity: var(--paw-opacity);
+      background: var(--paw-color);
+      -webkit-mask: url("mrcx36dx-paw-01.svg") center / contain no-repeat;
+      mask: url("mrcx36dx-paw-01.svg") center / contain no-repeat;
+      transform: translate(-50%, -50%) rotate(var(--paw-rotation));
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+      gap: clamp(var(--space-8), 5vw, 72px);
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-side {
+      position: relative;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-active);
+      margin-bottom: var(--space-4);
+    }
+    h1 { font-size: clamp(46px, 7vw, var(--text-4xl)); line-height: var(--leading-tight); font-weight: 600; }
+    h2 { font-size: clamp(34px, 4vw, var(--text-3xl)); line-height: 1.08; font-weight: 600; }
+    h3 { font-size: var(--text-xl); line-height: 1.14; font-weight: 600; }
+    .lead { color: var(--muted); font-size: clamp(19px, 2vw, var(--text-lg)); line-height: 1.38; max-width: 56ch; }
+    .hero .lead { margin-top: var(--space-5); }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
+    .hero-note { margin-top: var(--space-5); color: var(--muted); font-size: var(--text-sm); }
+    .generator-shell {
+      background: var(--bg);
+      border: 3px solid color-mix(in oklab, var(--fg), transparent 86%);
+      border-radius: 42px;
+      box-shadow: var(--elev-raised);
+      overflow: hidden;
+      position: relative;
+    }
+    .generator-shell::before,
+    .generator-shell::after {
+      content: none;
+      display: none;
+      border: 0;
+    }
+    .generator-head {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      align-items: center;
+      padding: var(--space-5) var(--space-6);
+      background: color-mix(in oklab, var(--surface-warm), var(--bg) 35%);
+      border-bottom: 2px solid var(--border-soft);
+    }
+    .window-dots { display: flex; gap: 7px; }
+    .window-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .generator-body { padding: var(--space-6); display: grid; gap: var(--space-5); }
+    .field { display: grid; gap: var(--space-2); }
+    .label-row { display: flex; justify-content: space-between; gap: var(--space-3); color: var(--fg-2); font-size: var(--text-sm); font-weight: 600; }
+    .hint { color: var(--muted); font-size: var(--text-xs); font-weight: 400; }
+    .segmented, .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .chip {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--bg);
+      color: var(--fg-2);
+      padding: 9px 15px;
+      min-height: 42px;
+      transition: all var(--motion-fast) var(--ease-standard);
+    }
+    .chip:hover { border-color: var(--meta); }
+    .chip[aria-pressed="true"] {
+      background: var(--fg);
+      color: var(--surface);
+      border-color: var(--fg);
+    }
+    .input {
+      width: 100%;
+      min-height: 48px;
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      background: color-mix(in oklab, var(--surface), var(--bg) 36%);
+      color: var(--fg);
+      padding: 12px 14px;
+    }
+    .input::placeholder { color: var(--meta); }
+    .form-actions { display: grid; grid-template-columns: 1fr auto; gap: var(--space-3); align-items: center; }
+    .status-line { min-height: 22px; color: var(--muted); font-size: var(--text-sm); }
+    .loading .spinner { display: inline-block; }
+    .spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid color-mix(in oklab, var(--accent-on), transparent 60%);
+      border-top-color: var(--accent-on);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pageFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pawBreathe {
+      from { transform: translate(-50%, -50%) rotate(var(--paw-rotation)) scale(0.96); }
+      to { transform: translate(-50%, -53%) rotate(var(--paw-rotation)) scale(1.04); }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      body { animation: pageFade 0.55s var(--ease-standard) both; }
+      .topnav { animation: riseIn 0.55s var(--ease-standard) both; }
+      .hero .eyebrow,
+      .hero h1,
+      .hero .lead,
+      .hero-cta,
+      .hero-note,
+      .hero-side {
+        opacity: 0;
+        animation: riseIn 0.72s var(--ease-standard) both;
+      }
+      .hero .eyebrow { animation-delay: 0.06s; }
+      .hero h1 { animation-delay: 0.14s; }
+      .hero .lead { animation-delay: 0.22s; }
+      .hero-cta { animation-delay: 0.3s; }
+      .hero-note { animation-delay: 0.38s; }
+      .hero-side { animation-delay: 0.26s; }
+      .hero-paw { animation: pawBreathe 7s ease-in-out infinite alternate; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn:active { transform: translateY(0) scale(0.98); }
+      .chip:hover { transform: translateY(-1px); }
+      .feature-card,
+      .step-row,
+      .tip-row,
+      details {
+        transition: transform var(--motion-base) var(--ease-standard), box-shadow var(--motion-base) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard);
+      }
+      .feature-card:hover,
+      details:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 34px color-mix(in oklab, var(--fg), transparent 90%);
+      }
+      .step-row:hover,
+      .tip-row:hover {
+        transform: translateX(4px);
+      }
+      .result-card {
+        animation: riseIn 0.58s var(--ease-standard) both;
+        animation-delay: calc(var(--result-index, 0) * 65ms);
+      }
+      .reveal-target {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.76s var(--ease-standard), transform 0.76s var(--ease-standard);
+      }
+      .reveal-target.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .mock-window {
+      margin-top: var(--space-5);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      padding: var(--space-4);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+    .sample-name {
+      background: var(--bg);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+    .sample-name strong { display: block; font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: var(--tracking-display); margin-bottom: var(--space-1); }
+    .sample-name span { color: var(--muted); font-size: var(--text-sm); }
+    .results-section { background: color-mix(in oklab, var(--surface), var(--bg) 54%); }
+    .section-head { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.45fr); gap: var(--space-8); align-items: end; margin-bottom: var(--space-12); }
+    .section-head .lead { font-size: var(--text-base); }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(var(--space-6), 3vw, var(--space-12));
+      align-items: stretch;
+    }
+    .result-card {
+      min-height: 238px;
+      background: var(--surface);
+      border: 2px solid var(--border-soft);
+      border-radius: 26px;
+      padding: clamp(var(--space-5), 2.4vw, var(--space-8));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-6);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard);
+    }
+    .result-card::before {
+      content: "";
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      right: 14px;
+      top: 14px;
+      opacity: 0.18;
+      background: var(--accent);
+      -webkit-mask: url("mrcx36dx-paw-01.svg") center / contain no-repeat;
+      mask: url("mrcx36dx-paw-01.svg") center / contain no-repeat;
+      transform: rotate(-18deg);
+    }
+    .result-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px color-mix(in oklab, var(--fg), transparent 88%);
+    }
+    .result-card:nth-child(2n) { background: color-mix(in oklab, var(--accent-active), var(--surface) 72%); }
+    .result-card:nth-child(3n) { background: color-mix(in oklab, var(--surface-warm), var(--surface) 42%); }
+    .result-card strong { font-family: var(--font-display); font-size: var(--text-xl); letter-spacing: var(--tracking-display); }
+    .result-card p { color: var(--muted); font-size: var(--text-sm); line-height: 1.45; }
+    .copy-btn {
+      align-self: flex-start;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: color-mix(in oklab, var(--accent-active), var(--bg) 42%);
+      color: var(--fg-2);
+      padding: 6px 10px;
+      font-size: var(--text-xs);
+    }
+    .copy-btn:hover { border-color: var(--meta); }
+    .feature-band { background: color-mix(in oklab, var(--accent-active), var(--bg) 72%); }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+    .feature-card {
+      background: var(--bg);
+      border: 2px solid var(--border-soft);
+      border-radius: 28px;
+      padding: var(--space-6);
+      min-height: 230px;
+      box-shadow: 0 10px 24px color-mix(in oklab, var(--fg), transparent 91%);
+    }
+    .feature-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 42% 58% 55% 45%;
+      border: 2px solid var(--border);
+      background: var(--surface-warm);
+      color: var(--fg);
+      margin-bottom: var(--space-6);
+    }
+    .feature-card p { margin-top: var(--space-3); color: var(--muted); font-size: var(--text-sm); }
+    .content-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--space-12); align-items: start; }
+    .steps, .tips { display: grid; gap: var(--space-3); }
+    .step-row, .tip-row {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-top: 1px solid var(--border-soft);
+    }
+    .step-index {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--surface-warm);
+      color: var(--fg);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+    }
+    .step-row p, .tip-row p { color: var(--muted); font-size: var(--text-sm); margin-top: var(--space-1); }
+    .faq-section { background: color-mix(in oklab, var(--surface-warm), var(--bg) 42%); }
+    .faq-list { max-width: 860px; margin-inline: auto; display: grid; gap: var(--space-3); }
+    details {
+      background: var(--bg);
+      border: 2px solid var(--border-soft);
+      border-radius: 24px;
+      padding: var(--space-5);
+    }
+    summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-family: var(--font-mono); color: var(--muted); }
+    details[open] summary::after { content: "-"; }
+    details p { margin-top: var(--space-3); color: var(--muted); }
+    .cta-strip {
+      text-align: center;
+      background: var(--fg);
+      color: var(--bg);
+    }
+    .cta-strip .lead { color: color-mix(in oklab, var(--bg), transparent 24%); margin: var(--space-4) auto var(--space-8); }
+    .cta-strip .btn-primary { background: var(--bg); color: var(--fg); }
+    .pagefoot {
+      padding-block: var(--space-8);
+      color: var(--muted);
+      font-size: var(--text-sm);
+      border-top: 1px solid var(--border-soft);
+    }
+    .foot-row { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+    @media (max-width: 1180px) {
+      .results-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 920px) {
+      .container { padding-inline: var(--container-gutter-tablet); }
+      .section { padding-block: var(--section-y-tablet); }
+      .hero { min-height: auto; }
+      .hero-grid, .section-head, .content-grid { grid-template-columns: 1fr; }
+      .generator-shell { border-radius: 24px; }
+      .features { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      .container { padding-inline: var(--container-gutter-phone); }
+      .section { padding-block: var(--section-y-phone); }
+      h1 { font-size: clamp(40px, 12vw, 54px); }
+      .topnav .btn { display: none; }
+      .hero-cta, .form-actions { grid-template-columns: 1fr; display: grid; }
+      .hero-cta .btn, .form-actions .btn { width: 100%; }
+      .generator-body, .generator-head { padding: var(--space-4); }
+      .mock-window, .results-grid { grid-template-columns: 1fr; }
+      .result-card { min-height: 154px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topnav" data-od-id="topnav">
+    <div class="container topnav-inner">
+      <a class="brand" href="#top" data-od-id="brand-link">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Pet Name Generator</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation" data-od-id="primary-nav">
+        <a href="#generator" data-od-id="nav-generator">Generator</a>
+        <a href="#how" data-od-id="nav-how">How it works</a>
+        <a href="#faq" data-od-id="nav-faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section hero" data-od-id="hero">
+      <div class="hero-paw-field" aria-hidden="true" data-od-id="hero-paw-field"></div>
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow" data-od-id="hero-eyebrow">AI PET NAME GENERATOR</p>
+          <h1 data-od-id="hero-title">Find a meaningful name for your new family member.</h1>
+          <p class="lead" data-od-id="hero-lead">Enter your pet type, personality keywords, and naming style to generate 6 unique names, each with a short meaning.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#generator" data-od-id="hero-primary-cta">Generate 6 names</a>
+            <a class="btn btn-secondary" href="#results" data-od-id="hero-secondary-cta">View sample results</a>
+          </div>
+          <p class="hero-note" data-od-id="hero-note">Built for newly adopted pets, renaming moments, and families who want a name with a little more story.</p>
+        </div>
+        <div class="hero-side" data-od-id="hero-generator-panel">
+          <section class="generator-shell" id="generator" aria-label="Pet name generator" data-od-id="generator-card">
+          <div class="generator-head">
+            <div>
+              <strong>Name generator</strong>
+              <div class="hint">Describe the vibe. Get names with meaning.</div>
+            </div>
+          </div>
+          <form class="generator-body" id="nameForm" data-od-id="generator-form">
+            <div class="field">
+              <div class="label-row"><label>Pet type</label><span class="hint">Required</span></div>
+              <div class="segmented" data-group="petType" data-od-id="pet-type-selector">
+                <button type="button" class="chip" aria-pressed="true" data-value="dog">Dog</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="cat">Cat</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="other pet">Other</button>
+              </div>
+            </div>
+            <div class="field">
+              <div class="label-row"><label>Gender</label><span class="hint">Optional</span></div>
+              <div class="segmented" data-group="gender" data-od-id="gender-selector">
+                <button type="button" class="chip" aria-pressed="false" data-value="male">Male</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="female">Female</button>
+                <button type="button" class="chip" aria-pressed="true" data-value="neutral">Neutral</button>
+              </div>
+            </div>
+            <div class="field">
+              <div class="label-row"><label>Naming style</label><span class="hint">Multi-select</span></div>
+              <div class="chips" data-group="styles" data-od-id="style-selector">
+                <button type="button" class="chip" aria-pressed="true" data-value="cute">Cute</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="royal">Royal</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="fantasy">Fantasy</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="Japanese-inspired">Japanese-inspired</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="strong">Strong</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="funny">Funny</button>
+                <button type="button" class="chip" aria-pressed="false" data-value="elegant">Elegant</button>
+              </div>
+            </div>
+            <div class="field">
+              <div class="label-row"><label for="keywords">Story With Your New Family Member</label><span class="hint">Recommended</span></div>
+              <input class="input" id="keywords" data-od-id="keyword-input" placeholder="e.g. sunshine, loyal, black fur, calm, winter" value="sunshine, loyal, calm">
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" id="generateBtn" data-od-id="generate-button" type="submit"><span class="spinner" aria-hidden="true"></span><span>Generate 6 names</span></button>
+              <button class="btn btn-secondary" id="resetBtn" data-od-id="reset-button" type="button">Reset</button>
+            </div>
+            <p class="status-line" id="statusLine" data-od-id="generator-status">Generated 6 names for your dog.</p>
+          </form>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section results-section" id="results" data-od-id="results-section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" data-od-id="results-eyebrow">NAME IDEAS</p>
+            <h2 data-od-id="results-title">Generate 6 names at once, each with a reason it fits.</h2>
+          </div>
+          <p class="lead" data-od-id="results-lead">Results are tuned to feel emotional, creative, globally readable, and less like a random repeated list.</p>
+        </div>
+        <div class="results-grid" id="resultsGrid" data-od-id="results-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section feature-band" data-od-id="features-section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" data-od-id="features-eyebrow">WHAT'S DIFFERENT</p>
+            <h2 data-od-id="features-title">Not just a list of names. A naming assistant that explains the idea.</h2>
+          </div>
+          <p class="lead" data-od-id="features-lead">It combines your pet's personality, look, and your naming preferences into results that feel more personal.</p>
+        </div>
+        <div class="features">
+          <article class="feature-card" data-od-id="feature-card-meaning">
+            <div class="feature-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M5 9h14M7 15h10"></path></svg>
+            </div>
+            <h3>Meanings included</h3>
+            <p>Every result explains the emotion, personality, or image behind the name so you can judge whether it truly fits.</p>
+          </article>
+          <article class="feature-card" data-od-id="feature-card-natural-input">
+            <div class="feature-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 7h14M5 12h10M5 17h7"></path></svg>
+            </div>
+            <h3>Natural keyword input</h3>
+            <p>Describe your pet with phrases like "sunshine, loyal, black fur, calm, winter" without learning complex settings.</p>
+          </article>
+          <article class="feature-card" data-od-id="feature-card-regenerate">
+            <div class="feature-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 7h9a4 4 0 0 1 0 8H6"></path><path d="M9 4 6 7l3 3"></path></svg>
+            </div>
+            <h3>Regenerate and compare</h3>
+            <p>Keep the same inputs and generate again to compare different dog names with meaning and cat name ideas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how" data-od-id="how-section">
+      <div class="container content-grid">
+        <div>
+          <p class="eyebrow" data-od-id="how-eyebrow">HOW IT WORKS</p>
+          <h2 data-od-id="how-title">From pet personality to shareable name in four steps.</h2>
+        </div>
+        <div class="steps">
+          <article class="step-row" data-od-id="step-enter-info">
+            <span class="step-index">01</span>
+            <div><strong>Enter pet details</strong><p>Start with dog, cat, or another pet type, then add an optional gender tone.</p></div>
+          </article>
+          <article class="step-row" data-od-id="step-choose-style">
+            <span class="step-index">02</span>
+            <div><strong>Choose style and keywords</strong><p>Use tags like cute, royal, fantasy, Japanese-inspired, or elegant to guide the direction.</p></div>
+          </article>
+          <article class="step-row" data-od-id="step-generate">
+            <span class="step-index">03</span>
+            <div><strong>Generate 6 AI names</strong><p>Each name includes one or two lines of meaning, aligned with the search intent for unique pet names.</p></div>
+          </article>
+          <article class="step-row" data-od-id="step-regenerate">
+            <span class="step-index">04</span>
+            <div><strong>Copy or regenerate</strong><p>Copy a favorite name, or keep your inputs and explore a new set.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="tips-section">
+      <div class="container content-grid">
+        <div>
+          <p class="eyebrow" data-od-id="tips-eyebrow">NAMING TIPS</p>
+          <h2 data-od-id="tips-title">Great pet names are usually short, easy to say, and aligned with personality.</h2>
+        </div>
+        <div class="tips">
+          <article class="tip-row" data-od-id="tip-short">
+            <span class="step-index">A</span>
+            <div><strong>Prefer one to three syllables</strong><p>Short names are easier to remember during training, recall, and everyday sharing.</p></div>
+          </article>
+          <article class="tip-row" data-od-id="tip-meaning">
+            <span class="step-index">B</span>
+            <div><strong>Match meaning to personality</strong><p>Keywords like calm, brave, affectionate, or elegant make a name feel more personal.</p></div>
+          </article>
+          <article class="tip-row" data-od-id="tip-spelling">
+            <span class="step-index">C</span>
+            <div><strong>Avoid overly complex spelling</strong><p>Unique should not mean hard to say; a good pet name generator balances creativity with pronunciation.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq" data-od-id="faq-section">
+      <div class="container">
+        <div style="text-align:center; max-width: 680px; margin: 0 auto var(--space-12);">
+          <p class="eyebrow" data-od-id="faq-eyebrow">FAQ</p>
+          <h2 data-od-id="faq-title">Frequently asked questions</h2>
+        </div>
+        <div class="faq-list" data-od-id="faq-list">
+          <details open="" data-od-id="faq-how-ai">
+            <summary>How does AI generate pet names?</summary>
+            <p>It combines pet type, gender tone, style tags, and keywords to create emotionally aligned names with short explanations.</p>
+          </details>
+          <details data-od-id="faq-unique">
+            <summary>Are these names unique?</summary>
+            <p>The goal is to generate non-repetitive, personalized options. Global uniqueness cannot be guaranteed, but the output avoids generic random lists.</p>
+          </details>
+          <details data-od-id="faq-regenerate">
+            <summary>Can I regenerate the results?</summary>
+            <p>Yes. Keep the same inputs and generate again to see another naming direction.</p>
+          </details>
+          <details data-od-id="faq-animals">
+            <summary>What animals does it support?</summary>
+            <p>It currently supports dogs, cats, and other pets. You can add breed, fur color, size, or personality details in the keyword field.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-strip" data-od-id="cta-section">
+      <div class="container" style="max-width: 720px;">
+        <h2 data-od-id="cta-title">Give your pet a name that is easy to call and rich with meaning.</h2>
+        <p class="lead" data-od-id="cta-lead">From cute to elegant, calm to brave, a new set of keywords opens a new naming direction.</p>
+        <a class="btn btn-primary" href="#generator" data-od-id="cta-button">Back to generator</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pagefoot" data-od-id="footer">
+    <div class="container foot-row">
+      <span>AI Pet Name Generator</span>
+      <span>pet name generator · dog names with meaning · cat name ideas · unique pet names</span>
+    </div>
+  </footer>
+
+  <script>
+    const nameBank = {
+      "dog": ["Sunny", "Milo", "Scout", "Luna", "Bowie", "Maple"],
+      "cat": ["Mochi", "Nori", "Velvet", "Miso", "Sora", "Cleo"],
+      "other pet": ["Pip", "Rune", "Pebble", "Kiko", "Blue", "Juniper"]
+    };
+    const RESULT_COUNT = 6;
+    const meanings = [
+      "A bright companion name that sounds gentle, warm, and easy to call.",
+      "Friendly and curious, suited to a new family member who loves to explore.",
+      "Short and clear for recall training, with a little adventurous energy.",
+      "A calm, moonlit name for a soft, affectionate, or elegant pet.",
+      "Slightly artistic and memorable, ideal for a lively pet with camera-ready charm.",
+      "Warm and seasonal, with the feeling of home, comfort, and everyday closeness."
+    ];
+    const groups = document.querySelectorAll("[data-group]");
+    const form = document.getElementById("nameForm");
+    const grid = document.getElementById("resultsGrid");
+    const statusLine = document.getElementById("statusLine");
+    const generateBtn = document.getElementById("generateBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const keywords = document.getElementById("keywords");
+    const heroPawField = document.querySelector(".hero-paw-field");
+
+    function renderHeroPaws() {
+      if (!heroPawField) return;
+      const bounds = heroPawField.getBoundingClientRect();
+      const targetCount = Math.floor(Math.random() * 9) + 20;
+      const colors = ["var(--accent)", "var(--accent-active)"];
+      const placed = [];
+      heroPawField.innerHTML = "";
+      for (let index = 0; index < targetCount; index += 1) {
+        let candidate = null;
+        for (let attempt = 0; attempt < 180; attempt += 1) {
+          const sizeMax = Math.min(112, Math.max(64, bounds.width * 0.08));
+          const size = Math.round(Math.random() * (sizeMax - 42)) + 42;
+          const radius = size * 0.56;
+          const x = Math.round(Math.random() * (bounds.width - size)) + size / 2;
+          const y = Math.round(Math.random() * (bounds.height - size)) + size / 2;
+          const overlaps = placed.some((item) => {
+            const distance = Math.hypot(item.x - x, item.y - y);
+            return distance < item.radius + radius + 14;
+          });
+          if (!overlaps) {
+            candidate = { x, y, size, radius };
+            break;
+          }
+        }
+        if (!candidate) continue;
+        placed.push(candidate);
+        const paw = document.createElement("span");
+        paw.className = "hero-paw";
+        paw.style.setProperty("--paw-size", `${candidate.size}px`);
+        paw.style.setProperty("--paw-left", `${((candidate.x / bounds.width) * 100).toFixed(2)}%`);
+        paw.style.setProperty("--paw-top", `${((candidate.y / bounds.height) * 100).toFixed(2)}%`);
+        paw.style.setProperty("--paw-rotation", `${Math.round(Math.random() * 80) - 40}deg`);
+        paw.style.setProperty("--paw-opacity", `${(Math.random() * 0.11 + 0.07).toFixed(2)}`);
+        paw.style.setProperty("--paw-color", colors[index % colors.length]);
+        heroPawField.appendChild(paw);
+      }
+    }
+
+    function selectedValue(groupName) {
+      const selected = document.querySelector(`[data-group="${groupName}"] .chip[aria-pressed="true"]`);
+      return selected ? selected.dataset.value : "";
+    }
+
+    function selectedStyles() {
+      return Array.from(document.querySelectorAll('[data-group="styles"] .chip[aria-pressed="true"]')).map((chip) => chip.dataset.value);
+    }
+
+    function renderResults() {
+      const petType = selectedValue("petType") || "dog";
+      const gender = selectedValue("gender") || "neutral";
+      const styles = selectedStyles();
+      const keywordText = keywords.value.trim() || "gentle, affectionate";
+      const names = nameBank[petType].slice(0, RESULT_COUNT);
+      grid.innerHTML = names.map((name, index) => {
+        const styleText = styles[index % Math.max(styles.length, 1)] || "natural";
+        const meaning = `${meanings[index]} It reflects "${keywordText}" with a ${styleText} style, suited to a ${gender} ${petType}.`;
+        return `
+          <article class="result-card" style="--result-index: ${index}" data-od-id="result-card-${index + 1}">
+            <div>
+              <strong>${name}</strong>
+              <p>${meaning}</p>
+            </div>
+            <button class="copy-btn" type="button" data-name="${name}">Copy name</button>
+          </article>
+        `;
+      }).join("");
+      statusLine.textContent = `Generated ${RESULT_COUNT} names for your ${petType}.`;
+    }
+
+    function setupScrollReveals() {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reducedMotion || !("IntersectionObserver" in window)) return;
+      const revealItems = document.querySelectorAll([
+        ".section:not(.hero) .section-head",
+        ".feature-card",
+        ".mock-window",
+        ".step-row",
+        ".tip-row",
+        "details",
+        ".cta-strip .container"
+      ].join(","));
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+      revealItems.forEach((item) => {
+        item.classList.add("reveal-target");
+        observer.observe(item);
+      });
+    }
+
+    groups.forEach((group) => {
+      const mode = group.dataset.group === "styles" ? "multi" : "single";
+      group.addEventListener("click", (event) => {
+        const chip = event.target.closest(".chip");
+        if (!chip) return;
+        if (mode === "single") {
+          group.querySelectorAll(".chip").forEach((item) => item.setAttribute("aria-pressed", "false"));
+          chip.setAttribute("aria-pressed", "true");
+        } else {
+          const isPressed = chip.getAttribute("aria-pressed") === "true";
+          chip.setAttribute("aria-pressed", String(!isPressed));
+        }
+      });
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      generateBtn.classList.add("loading");
+      generateBtn.disabled = true;
+      statusLine.textContent = "AI is crafting meaningful names...";
+      window.setTimeout(() => {
+        renderResults();
+        generateBtn.classList.remove("loading");
+        generateBtn.disabled = false;
+      }, 720);
+    });
+
+    resetBtn.addEventListener("click", () => {
+      keywords.value = "";
+      document.querySelectorAll('[data-group="styles"] .chip').forEach((chip, index) => chip.setAttribute("aria-pressed", String(index === 0)));
+      statusLine.textContent = "Reset complete. Add a new pet vibe when ready.";
+    });
+
+    grid.addEventListener("click", async (event) => {
+      const button = event.target.closest(".copy-btn");
+      if (!button) return;
+      try {
+        await navigator.clipboard.writeText(button.dataset.name);
+        button.textContent = "Copied";
+        window.setTimeout(() => { button.textContent = "Copy name"; }, 1100);
+      } catch {
+        button.textContent = "Copy failed";
+      }
+    });
+
+    renderHeroPaws();
+    renderResults();
+    setupScrollReveals();
+  </script>
+
+
+
+</body></html>
