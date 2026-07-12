@@ -14,11 +14,12 @@ declare global {
 
 type TurnstileProps = {
   onTokenChange: (token: string | null) => void;
+  resetSignal?: number;
 };
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-export function Turnstile({ onTokenChange }: TurnstileProps) {
+export function Turnstile({ onTokenChange, resetSignal = 0 }: TurnstileProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
   const [scriptReady, setScriptReady] = useState(false);
@@ -50,6 +51,13 @@ export function Turnstile({ onTokenChange }: TurnstileProps) {
       widgetIdRef.current = null;
     };
   }, [onTokenChange, scriptReady]);
+
+  useEffect(() => {
+    if (!resetSignal || !widgetIdRef.current || !window.turnstile) return;
+    window.turnstile.reset(widgetIdRef.current);
+    onTokenChange(null);
+    setError(false);
+  }, [onTokenChange, resetSignal]);
 
   if (!siteKey) return null;
   return <div className="turnstile" aria-live="polite"><div ref={containerRef} />{error && <p className="status">Security check could not load. Please refresh and try again.</p>}</div>;
