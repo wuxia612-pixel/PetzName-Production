@@ -54,6 +54,9 @@ body{animation:page-in var(--motion-slow) var(--ease-out) both}
 @media(prefers-reduced-motion:reduce){.paw-stamp{opacity:.13}}
 
 textarea{font:inherit;line-height:var(--leading)}
+.footer-brand{display:grid;gap:6px;align-content:start}.footer-brand span{color:color-mix(in oklab,var(--surface),transparent 34%)}.footer-nav{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:14px 24px}.footer-nav a{display:grid;gap:3px;min-width:120px}.footer-nav strong{font-size:12px}.footer-nav small{color:color-mix(in oklab,var(--surface),transparent 42%);font-size:11px;line-height:1.35}.footer-nav a:hover strong{color:var(--accent)}
+@media(max-width:920px){.footer-nav{grid-template-columns:repeat(2,minmax(120px,1fr))}}
+@media(max-width:560px){.footer-nav{width:100%;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px}}
 .legal-updated{margin-top:14px;color:var(--meta);font:var(--text-xs)/1.4 var(--font-mono);letter-spacing:.02em}.legal-content ul{margin:14px 0 0;padding-left:22px;color:var(--fg-2)}.legal-content li{margin-top:10px;padding-left:4px}.legal-content strong{color:var(--fg)}
 .story-input{min-height:104px;resize:vertical}
 .turnstile{min-height:65px;display:flex;align-items:center}
