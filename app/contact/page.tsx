@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LegalPage, siteEmail } from "@/components/seo/LegalPage";
+import { absoluteUrl } from "@/lib/site";
+export const metadata: Metadata = { title: "Contact PetzName", description: "Contact the PetzName team with feedback, questions, or support requests.", alternates: { canonical: "/contact" }, openGraph: { title: "Contact PetzName | Pet Name Generator", description: "Contact the PetzName team with feedback, questions, or support requests.", url: absoluteUrl("/contact"), images: [{ url: "/opengraph-image" }] } };
+export default function ContactPage() { return <LegalPage eyebrow="CONTACT" title="We would love to hear from you." intro="Send feedback about the generator, report an issue, or ask a question about PetzName." sections={[{ title: "Email", content: <p>Write to {siteEmail}. We read every message and aim to respond as soon as we can.</p> }, { title: "Helpful details", content: <p>If you are reporting an issue, please include the page you visited, the device and browser you used, and a short description of what happened.</p> }]} />; }

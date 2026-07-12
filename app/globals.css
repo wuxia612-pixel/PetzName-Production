@@ -56,3 +56,6 @@ body{animation:page-in var(--motion-slow) var(--ease-out) both}
 textarea{font:inherit;line-height:var(--leading)}
 .story-input{min-height:104px;resize:vertical}
 .turnstile{min-height:65px;display:flex;align-items:center}
+
+/* Trust and policy pages */
+.footer-nav{display:flex;gap:14px;flex-wrap:wrap}.footer-nav a:hover,.legal-back a:hover{text-decoration:underline}.legal-page{min-height:calc(100svh - 52px);padding:clamp(64px,10vw,120px) 0;background:var(--surface)}.legal-page h1{max-width:900px}.legal-page>.container>.lead{max-width:760px;margin-top:20px}.legal-content{max-width:760px;margin-top:56px}.legal-content section{padding:28px 0;border-top:2px solid var(--border)}.legal-content h2{font-size:clamp(26px,3vw,34px)}.legal-content p{margin-top:12px;color:var(--fg-2)}.legal-content a{color:#2c7599;text-decoration:underline}.legal-back{margin-top:44px;font-weight:700}
