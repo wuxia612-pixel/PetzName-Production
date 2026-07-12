@@ -3,6 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://petzname.com"),
+  icons: {
+    icon: [{ url: "/paw.svg", type: "image/svg+xml" }],
+    shortcut: ["/paw.svg"],
+    apple: [{ url: "/paw.svg" }],
+  },
   title: {
     default: "Pet Name Generator | Names With Meaning",
     template: "%s | Pet Name Generator",
