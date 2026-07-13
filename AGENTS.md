@@ -9,8 +9,11 @@
 - `app/`：App Router 路由、全局样式和元数据。
 - `app/page.tsx`：产品首页组合入口。
 - `app/design-system/page.tsx`：仅开发环境可访问的设计系统预览。
+- `app/[slug]/page.tsx`：静态生成的 SEO 命名专题落地页路由。
 - `components/ui/`：无业务语义的基础组件（Button、Chip、Card、Container、SectionHeading）。
 - `components/landing/`：首页业务组件与生成器状态。
+- `components/seo/NameLandingPage.tsx`：可复用的 SEO 专题页面模板。
+- `lib/seo-pages.ts`：SEO 页面内容、关键词主题及内链关系的唯一数据源。
 - `public/`：从原型复用的静态品牌资源。
 - `temp/`：原生 HTML、品牌规范和原始素材，仅作迁移参考。
 
@@ -30,3 +33,5 @@
 - 修改响应布局时同时验证 1180px、920px 和 560px 三个边界。
 - `/design-system` 仅用于本地开发验证，生产环境必须返回 404。
 - `temp/landing.html` 是像素还原的参考基准；产品实现以 React/Next.js 组件为唯一运行来源。
+- 新增 SEO 页面时优先在 `lib/seo-pages.ts` 增加一条有独立搜索意图、示例名称和相关推荐的内容配置；不得复制路由或模板。
+- 扩展到数百个 SEO 页面时，保持每个主题有真实且不同的内容价值，避免仅替换关键词的薄内容页面。
