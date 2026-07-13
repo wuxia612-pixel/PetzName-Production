@@ -1,6 +1,29 @@
-export type SeoPage = { slug: string; title: string; description: string; eyebrow: string; intro: string; tips: [string, string, string]; examples: string[]; related: string[] };
+export type SeoNameIdea = {
+  name: string;
+  meaning: string;
+};
 
-type Seed = { slug: string; subject: string; qualifier?: string; examples: string[]; related: string[] };
+export type SeoPage = {
+  slug: string;
+  title: string;
+  description: string;
+  eyebrow: string;
+  intro: string;
+  listIntro: string;
+  ctaTitle: string;
+  tips: [string, string, string];
+  examples: string[];
+  names: SeoNameIdea[];
+  related: string[];
+};
+
+type Seed = {
+  slug: string;
+  subject: string;
+  qualifier?: string;
+  examples: string[];
+  related: string[];
+};
 
 const seeds: Seed[] = [
   { slug: "dog-names", subject: "dog", examples: ["Milo", "Daisy", "Scout", "Maple", "Teddy", "Winnie"], related: ["cute-dog-names", "male-dog-names", "female-dog-names", "puppy-names"] },
@@ -34,12 +57,76 @@ const seeds: Seed[] = [
   { slug: "disney-pet-names", subject: "pet", qualifier: "Disney-inspired", examples: ["Nala", "Simba", "Dory", "Stitch", "Remy", "Belle"], related: ["funny-pet-names", "cute-dog-names", "cute-cat-names", "mythology-pet-names"] },
 ];
 
-function titleCase(value: string) { return value.replace(/\b\w/g, (letter) => letter.toUpperCase()); }
+const nameBank = [
+  "Milo", "Teddy", "Luna", "Daisy", "Charlie", "Bella", "Cooper", "Lucy", "Max", "Rosie",
+  "Bailey", "Nala", "Finn", "Willow", "Oliver", "Ruby", "Leo", "Poppy", "Scout", "Mochi",
+  "Maple", "Winnie", "Archie", "Coco", "Jasper", "Millie", "Theo", "Hazel", "Ollie", "Ivy",
+  "Riley", "Cleo", "Biscuit", "Sunny", "Honey", "Pepper", "Nova", "Bean", "Koda", "Mabel",
+  "Pip", "Remy", "Sage", "Cookie", "Bruno", "Miso", "Pippa", "Benny", "Toffee", "Clover",
+  "Pumpkin", "Ziggy", "Pearl", "Niko", "Skye", "Moose", "Aspen", "Ranger", "Jet", "Onyx",
+  "Raven", "Shadow", "Snowy", "Cloud", "Ivory", "Chestnut", "Cocoa", "Goldie", "Aurora", "Storm",
+  "Rocky", "Ace", "Zara", "Tank", "Tango", "Salem", "Midnight", "Ink", "Ginger", "Marmalade",
+  "Pixel", "Freckle", "Tofu", "Boba", "Yuki", "Sora", "Kiki", "Haru", "Nami", "Momo",
+  "Apollo", "Freya", "Atlas", "Nyx", "Odin", "Iris", "Simba", "Stitch", "Belle", "Pickles",
+  "Waffles", "Nugget", "Juniper", "Echo", "Indigo", "Zephyr", "Solstice", "Velvet", "Monaco", "Bijou",
+];
+
+const meaningTemplates = [
+  (name: string, phrase: string) => `${name} has a soft, friendly sound that suits a ${phrase} with a loving personality.`,
+  (name: string, phrase: string) => `${name} feels warm and easy to call, making it a sweet choice for a ${phrase} who is part of the family.`,
+  (name: string, phrase: string) => `${name} gives a bright, cheerful feeling and works well for a ${phrase} who brings joy into the home.`,
+  (name: string, phrase: string) => `${name} has a gentle rhythm, perfect for a ${phrase} with a calm heart and loyal nature.`,
+  (name: string, phrase: string) => `${name} feels playful without being too silly, a good match for a ${phrase} with everyday charm.`,
+  (name: string, phrase: string) => `${name} sounds affectionate and memorable, which makes it easy for everyone at home to love.`,
+  (name: string, phrase: string) => `${name} carries a cozy feeling and fits a ${phrase} who loves attention, cuddles, and familiar voices.`,
+  (name: string, phrase: string) => `${name} is short, clear, and full of character, ideal for a ${phrase} who responds to a happy call.`,
+  (name: string, phrase: string) => `${name} has a bright name meaning in spirit: comfort, companionship, and a little everyday magic.`,
+  (name: string, phrase: string) => `${name} feels personal and kind, a name that can grow with your ${phrase} through every season together.`,
+];
+
+function titleCase(value: string) {
+  return value.replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function uniqueNames(names: string[]) {
+  return Array.from(new Set(names));
+}
+
+function createNameIdeas(seed: Seed, phrase: string): SeoNameIdea[] {
+  return uniqueNames([...seed.examples, ...nameBank])
+    .slice(0, 100)
+    .map((name, index) => ({
+      name,
+      meaning: meaningTemplates[index % meaningTemplates.length](name, phrase),
+    }));
+}
+
 function createPage(seed: Seed): SeoPage {
   const phrase = `${seed.qualifier ? `${seed.qualifier} ` : ""}${seed.subject}`;
   const display = titleCase(phrase);
-  return { slug: seed.slug, title: `${display} Names: Find a Meaningful Name for Your Pet`, description: `Explore ${phrase} names with ideas, simple naming tips, and a personal name generator for your companion.`, eyebrow: `${display.toUpperCase()} NAME IDEAS`, intro: `A name is one of the first little gifts you give a ${seed.subject}. Browse these ${phrase} name ideas, then use the details you love most—personality, colour, habits, and your story together—to discover a name that feels truly theirs.`, tips: [`Start with the feeling you want your ${seed.subject}'s name to carry.`, "Choose a name that is easy for your household to say and remember.", "Try a few favorites out loud before making the final choice."], examples: seed.examples, related: seed.related };
+
+  return {
+    slug: seed.slug,
+    title: `${display} Names`,
+    description: `Browse 100 ${phrase} names with simple meanings, then create a personalized pet name from your own story.`,
+    eyebrow: `${display.toUpperCase()} NAME IDEAS`,
+    intro: `Looking for a name that feels sweet, memorable, and right at home? Start with this list of ${phrase} names, then use your pet's personality and your story together to create something more personal.`,
+    listIntro: `Here are 100 ${phrase} names:`,
+    ctaTitle: "Need a personalized name?",
+    tips: [
+      `Start with the feeling you want your ${seed.subject}'s name to carry.`,
+      "Choose a name that is easy for your household to say and remember.",
+      "Try a few favorites out loud before making the final choice.",
+    ],
+    examples: seed.examples,
+    names: createNameIdeas(seed, phrase),
+    related: seed.related,
+  };
 }
+
 export const seoPages = seeds.map(createPage);
 export const seoPageBySlug = new Map(seoPages.map((page) => [page.slug, page]));
-export function getSeoPage(slug: string) { return seoPageBySlug.get(slug); }
+
+export function getSeoPage(slug: string) {
+  return seoPageBySlug.get(slug);
+}
