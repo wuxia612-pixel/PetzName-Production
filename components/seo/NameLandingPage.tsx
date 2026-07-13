@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { AdSenseScript } from "@/components/ads/AdSenseScript";
 import type { SeoPage } from "@/lib/seo-pages";
 import { absoluteUrl, site } from "@/lib/site";
 
@@ -57,6 +58,7 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
 
   return (
     <>
+      <AdSenseScript />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <header className="topnav">
         <Container className="nav-inner">

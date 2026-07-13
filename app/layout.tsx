@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AdSenseScript } from "@/components/ads/AdSenseScript";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { site } from "@/lib/site";
 
@@ -36,5 +35,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><AdSenseScript /><StructuredData />{children}</body></html>;
+  return <html lang="en"><body><StructuredData />{children}</body></html>;
 }
