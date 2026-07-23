@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     title: "Pet Name Generator | Names With Meaning",
-    description: "Turn your pet's personality and your shared story into six meaningful name ideas.",
+    description: "Generate six personalized pet names with meaning from your pet's personality, your favorite style, and your story together.",
     siteName: "Pet Name Generator",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "PetzName pet name generator" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pet Name Generator | Names With Meaning",
-    description: "Turn your pet's personality and your shared story into six meaningful name ideas.",
+    description: "Generate six personalized pet names with meaning from your pet's personality, your favorite style, and your story together.",
   },
 };
 
