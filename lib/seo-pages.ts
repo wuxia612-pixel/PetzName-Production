@@ -15,6 +15,7 @@ export type SeoPage = {
   examples: string[];
   names: SeoNameIdea[];
   related: string[];
+  searchIntent: string;
 };
 
 type Seed = {
@@ -23,15 +24,20 @@ type Seed = {
   qualifier?: string;
   examples: string[];
   related: string[];
+  searchIntent?: string;
 };
 
 const seeds: Seed[] = [
-  { slug: "dog-names", subject: "dog", examples: ["Milo", "Daisy", "Scout", "Maple", "Teddy", "Winnie"], related: ["cute-dog-names", "male-dog-names", "female-dog-names", "puppy-names"] },
+  { slug: "dog-names", subject: "dog", examples: ["Milo", "Daisy", "Scout", "Maple", "Teddy", "Winnie"], related: ["cute-dog-names", "male-dog-names", "female-dog-names", "puppy-names", "big-dog-names", "long-dog-names"] },
   { slug: "cute-dog-names", subject: "dog", qualifier: "cute", examples: ["Mochi", "Peanut", "Poppy", "Biscuit", "Teddy", "Noodle"], related: ["dog-names", "small-dog-names", "puppy-names", "female-dog-names"] },
   { slug: "male-dog-names", subject: "dog", qualifier: "male", examples: ["Cooper", "Finn", "Bear", "Archie", "Ranger", "Ollie"], related: ["dog-names", "female-dog-names", "cool-pet-names", "husky-names"] },
   { slug: "female-dog-names", subject: "dog", qualifier: "female", examples: ["Luna", "Rosie", "Willow", "Mabel", "Nala", "Millie"], related: ["dog-names", "cute-dog-names", "luxury-pet-names", "golden-retriever-names"] },
   { slug: "small-dog-names", subject: "small dog", examples: ["Bean", "Pixie", "Pip", "Dottie", "Mochi", "Tinker"], related: ["cute-dog-names", "puppy-names", "dog-names", "funny-pet-names"] },
-  { slug: "large-dog-names", subject: "large dog", examples: ["Atlas", "Moose", "Duke", "Aspen", "Ranger", "Nova"], related: ["dog-names", "cool-pet-names", "husky-names", "pitbull-names"] },
+  { slug: "large-dog-names", subject: "large dog", examples: ["Atlas", "Moose", "Duke", "Aspen", "Ranger", "Nova"], related: ["big-dog-names", "giant-dog-names", "dog-names", "cool-pet-names"] },
+  { slug: "big-dog-names", subject: "big dog", examples: ["Titan", "Bear", "Moose", "Summit", "Duke", "Koda"], related: ["giant-dog-names", "large-dog-names", "strong-dog-names", "dog-names"], searchIntent: "Names for a big dog should be easy to call across a park while still matching a larger-than-life personality. These ideas range from bold and outdoorsy to warm and gentle." },
+  { slug: "giant-dog-names", subject: "giant dog", examples: ["Goliath", "Mammoth", "Everest", "Titan", "Kodiak", "Sable"], related: ["big-dog-names", "large-dog-names", "strong-dog-names", "dog-names"], searchIntent: "Giant breeds can look imposing and still be famously gentle at home. Explore names with a grand sound, then choose one that also fits your dog's everyday temperament." },
+  { slug: "long-dog-names", subject: "long dog", examples: ["Wellington", "Montgomery", "Theodore", "Rosalind", "Juniper", "Archibald"], related: ["unique-pet-names", "funny-pet-names", "dog-names", "big-dog-names"], searchIntent: "Long dog names give you room for personality, nicknames, and a little ceremony. The best ones are still comfortable to say every day, whether you use the full name or a shorter call name." },
+  { slug: "strong-dog-names", subject: "strong dog", examples: ["Ranger", "Atlas", "Valor", "Kodiak", "Xena", "Sable"], related: ["big-dog-names", "giant-dog-names", "pitbull-names", "dog-names"], searchIntent: "A strong dog name can reflect courage, athleticism, resilience, or a quietly confident presence. Consider your dog's character as much as their size when choosing one." },
   { slug: "black-dog-names", subject: "black dog", examples: ["Onyx", "Raven", "Shadow", "Jet", "Licorice", "Sable"], related: ["white-dog-names", "brown-dog-names", "dog-names", "black-cat-names"] },
   { slug: "white-dog-names", subject: "white dog", examples: ["Snowy", "Pearl", "Cloud", "Casper", "Marshmallow", "Ivory"], related: ["black-dog-names", "brown-dog-names", "small-dog-names", "dog-names"] },
   { slug: "brown-dog-names", subject: "brown dog", examples: ["Cocoa", "Chestnut", "Maple", "Bruno", "Toffee", "Hazel"], related: ["black-dog-names", "white-dog-names", "golden-retriever-names", "dog-names"] },
@@ -107,10 +113,10 @@ function createPage(seed: Seed): SeoPage {
 
   return {
     slug: seed.slug,
-    title: `${display} Names`,
-    description: `Browse 100 ${phrase} names with simple meanings, then create a personalized pet name from your own story.`,
+    title: `100 ${display} Names With Meanings`,
+    description: `Explore 100 ${phrase} names with simple meanings and practical naming tips, then create a personalized idea for your pet.`,
     eyebrow: `${display.toUpperCase()} NAME IDEAS`,
-    intro: `Looking for a name that feels sweet, memorable, and right at home? Start with this list of ${phrase} names, then use your pet's personality and your story together to create something more personal.`,
+    intro: seed.searchIntent ?? `Looking for a name that feels sweet, memorable, and right at home? Start with this list of ${phrase} names, then use your pet's personality and your story together to create something more personal.`,
     listIntro: `Here are 100 ${phrase} names:`,
     ctaTitle: "Need a personalized name?",
     tips: [
@@ -121,6 +127,7 @@ function createPage(seed: Seed): SeoPage {
     examples: seed.examples,
     names: createNameIdeas(seed, phrase),
     related: seed.related,
+    searchIntent: seed.searchIntent ?? "",
   };
 }
 

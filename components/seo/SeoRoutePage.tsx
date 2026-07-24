@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NameLandingPage } from "@/components/seo/NameLandingPage";
 import { getSeoPage } from "@/lib/seo-pages";
+import { site } from "@/lib/site";
 
 export function createSeoPageMetadata(slug: string): Metadata {
   const page = getSeoPage(slug);
@@ -17,6 +18,7 @@ export function createSeoPageMetadata(slug: string): Metadata {
       description: page.description,
       url: canonical,
       type: "article",
+      modifiedTime: site.contentUpdated,
       images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: page.title }],
     },
     twitter: {
