@@ -11,8 +11,8 @@ export const metadata: Metadata = {
     apple: [{ url: "/paw.svg" }],
   },
   title: {
-    default: "Pet Name Generator | Names With Meaning",
-    template: "%s | Pet Name Generator",
+    default: "PetzName | AI Pet Name Generator",
+    template: "%s | PetzName",
   },
   description: site.description,
   keywords: ["AI pet name generator", "pet names with meaning", "dog name generator", "cat name generator", "unique pet names"],
@@ -22,15 +22,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    title: "Pet Name Generator | Names With Meaning",
-    description: "Turn your pet's personality and your shared story into six meaningful name ideas.",
-    siteName: "Pet Name Generator",
+    title: "PetzName | AI Pet Name Generator",
+    description: "Generate six personalized pet names with meaning from your pet's personality, your favorite style, and your story together.",
+    siteName: site.name,
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "PetzName pet name generator" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pet Name Generator | Names With Meaning",
-    description: "Turn your pet's personality and your shared story into six meaningful name ideas.",
+    title: "PetzName | AI Pet Name Generator",
+    description: "Generate six personalized pet names with meaning from your pet's personality, your favorite style, and your story together.",
   },
 };
 

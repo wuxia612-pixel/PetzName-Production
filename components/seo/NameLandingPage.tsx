@@ -64,10 +64,10 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
         <Container className="nav-inner">
           <a className="brand" href="/">
             <span className="brand-mark" />
-            Pet Name Generator
+            PetzName
           </a>
           <nav aria-label="Primary navigation">
-            <a href="/#generator">Find a name</a>
+            <a href="/#generator">Generate names</a>
             <a href="/dog-names">Dog names</a>
             <a href="/cat-names">Cat names</a>
             <a className="nav-info-link" href="/about">About</a>
@@ -82,7 +82,7 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
             <p className="eyebrow">{page.eyebrow}</p>
             <h1>{page.title}</h1>
             <p className="lead">{page.intro}</p>
-            <a className="button button--primary" href="/#generator">Find a personal pet name</a>
+            <a className="button button--primary" href="/#generator">Generate personal pet names</a>
           </Container>
         </section>
 
@@ -109,8 +109,8 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
             <div className="seo-convert-card">
               <p className="eyebrow">PERSONALIZE IT</p>
               <h2>{page.ctaTitle}</h2>
-              <p className="lead">A list is a great starting point. The generator turns your pet's type, personality, naming style, and story into six names made for your home.</p>
-              <a className="button button--primary" href="/#generator">Generate with AI <span aria-hidden="true">-&gt;</span></a>
+              <p className="lead">A list is a great starting point. Our AI pet name generator turns your pet's type, personality, naming style, and story into six personalized names with meaning.</p>
+              <a className="button button--primary" href="/#generator">Generate pet names <span aria-hidden="true">-&gt;</span></a>
             </div>
           </Container>
         </section>
@@ -153,7 +153,7 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
           <Container>
             <div className="faq-title">
               <p className="eyebrow">QUESTIONS, ANSWERED</p>
-              <h2>Finding the right name should feel joyful.</h2>
+              <h2>Generating the right pet name should feel simple.</h2>
             </div>
             <div className="faq-list">
               {faq.map(([question, answer], index) => (
@@ -169,8 +169,8 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
         <section className="section cta">
           <Container>
             <h2>There is a name waiting in your story together.</h2>
-            <p className="lead">Tell us a little about your companion and discover six names with meaning.</p>
-            <a className="button button--primary" href="/#generator">Find pet names</a>
+            <p className="lead">Tell us a little about your companion and generate six personalized names with meaning.</p>
+            <a className="button button--primary" href="/#generator">Generate pet names</a>
           </Container>
         </section>
       </main>
@@ -178,8 +178,8 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
       <footer>
         <Container className="footer-row">
           <div className="footer-brand">
-            <a href="/" aria-label="PetzName home">petzname.com</a>
-            <span>Thoughtful names for every kind of companion.</span>
+            <a href="/" aria-label="PetzName home">PetzName</a>
+            <span>Generate personalized names for every kind of companion.</span>
           </div>
           <nav className="footer-nav" aria-label="PetzName information">
             <a href="/about"><strong>About</strong><small>Our story and values</small></a>
