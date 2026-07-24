@@ -8,7 +8,7 @@ import { Turnstile } from "./Turnstile";
 export type Result = { name: string; meaning: string };
 
 const styles = ["Cute", "Royal", "Fantasy", "Japanese-inspired", "Strong", "Funny", "Elegant"];
-const storyExample = "e.g. She ran to us in the morning sun, full of joy, and made our home feel brighter.";
+const storyExample = "e.g. Golden coat, playful personality, loves the beach, or how you met.";
 const requiresVerification = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
 export function Generator({ onResults }: { onResults: (results: Result[]) => void }) {
@@ -19,7 +19,7 @@ export function Generator({ onResults }: { onResults: (results: Result[]) => voi
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [verificationGranted, setVerificationGranted] = useState(false);
   const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
-  const [status, setStatus] = useState("Whenever you are ready, one short memory is enough to begin.");
+  const [status, setStatus] = useState("Add any detail you like, or leave this blank to begin.");
   const [loading, setLoading] = useState(false);
   const handleTurnstileToken = useCallback((token: string | null) => setTurnstileToken(token), []);
   useEffect(() => {
@@ -64,7 +64,7 @@ export function Generator({ onResults }: { onResults: (results: Result[]) => voi
       <Choice label="Pet type" hint="Required">{(["dog", "cat", "other"] as const).map(v => <Chip key={v} selected={pet === v} onClick={() => setPet(v)}>{v === "other" ? "Other" : v[0].toUpperCase() + v.slice(1)}</Chip>)}</Choice>
       <Choice label="Gender" hint="Optional">{["Male", "Female", "Neutral"].map(v => <Chip key={v} selected={gender === v} onClick={() => setGender(v)}>{v}</Chip>)}</Choice>
       <Choice label="Naming style" hint="Choose one or more">{styles.map(v => <Chip key={v} selected={selectedStyles.includes(v)} onClick={() => setStyles(s => s.includes(v) ? s.filter(x => x !== v) : [...s, v])}>{v}</Chip>)}</Choice>
-      <label className="field"><span className="label-row"><b>Your story together</b><small>Recommended</small></span><textarea className="input story-input" value={keywords} onChange={e => setKeywords(e.target.value)} placeholder={storyExample} /></label>
+      <label className="field"><span className="label-row"><b>Your story or anything else you&apos;d like us to know</b><small>Optional</small></span><textarea className="input story-input" value={keywords} onChange={e => setKeywords(e.target.value)} placeholder={storyExample} /></label>
       {!verificationGranted && <Turnstile onTokenChange={handleTurnstileToken} resetSignal={turnstileResetSignal} />}
       <div className="form-actions"><Button disabled={loading}>{loading && <span className="spinner" />}{loading ? "Generating names..." : "Generate 6 names"}</Button><Button type="button" variant="secondary" onClick={() => { setKeywords(""); setStyles(["Cute"]); setStatus("Start fresh whenever you are ready."); }}>Reset</Button></div>
       <p className="status" role="status" aria-live="polite">{status}</p>

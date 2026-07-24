@@ -64,7 +64,7 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
         <Container className="nav-inner">
           <a className="brand" href="/">
             <span className="brand-mark" />
-            Pet Name Generator
+            PetzName
           </a>
           <nav aria-label="Primary navigation">
             <a href="/#generator">Generate names</a>
@@ -178,7 +178,7 @@ export function NameLandingPage({ page, relatedPages }: { page: SeoPage; related
       <footer>
         <Container className="footer-row">
           <div className="footer-brand">
-            <a href="/" aria-label="PetzName home">petzname.com</a>
+            <a href="/" aria-label="PetzName home">PetzName</a>
             <span>Generate personalized names for every kind of companion.</span>
           </div>
           <nav className="footer-nav" aria-label="PetzName information">
